@@ -21,6 +21,20 @@ function Tweet({ tweet }) {
         </div>
     );
 }
+// not necessary cause each component already has its' own PropTypes
+// Tweet.propTypes = {
+//     tweet: PropTypes.shape({
+//         gravatar: PropTypes.string.isRequired,
+//         author: PropTypes.shape({
+//             name: PropTypes.string.isRequired,
+//             handle: PropTypes.string.isRequired
+//         }),
+//         timestamp: PropTypes.string,
+//         message: PropTypes.string,
+//         retweets: PropTypes.number,
+//         likes: PropTypes.number
+//     })
+// };
 
 function Avatar({hash}) {
     var url = `https://www.gravatar.com/avatar/${hash}`
@@ -32,6 +46,9 @@ function Avatar({hash}) {
         />
     );
 }
+Avatar.propTypes = {
+    hash: PropTypes.string.isRequired
+};
 
 function Message({text}) {
     return (
@@ -40,6 +57,9 @@ function Message({text}) {
         </div>
     );
 }
+Message.propTypes = {
+    text: PropTypes.string
+};
 
 function NameWithHandle({author}) {
     const {name, handle} = author;
@@ -50,6 +70,12 @@ function NameWithHandle({author}) {
         </span>
     );  
 }
+NameWithHandle.propTypes = {
+    author: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        handle: PropTypes.string.isRequired
+    }).isRequired
+};
 
 const Time = ({time}) => {
     const timeString = moment(time).fromNow();
@@ -57,6 +83,9 @@ const Time = ({time}) => {
     return (
         <span className='time'>{timeString}</span>
     );
+};
+Time.propTypes = {
+    time: PropTypes.string
 };
 
 const ReplyButton = () => (
@@ -69,6 +98,9 @@ const RetweetButton = ({count}) => (
         {getRetweetCount(count)}
     </span>
 );
+RetweetButton.propTypes = {
+    count: PropTypes.number
+};
 
 const LikeButton = ({count}) => (
     <span className='like-button'>
@@ -81,7 +113,6 @@ const LikeButton = ({count}) => (
         }
     </span>
 );
-
 LikeButton.propTypes = {
     count: PropTypes.number
 };

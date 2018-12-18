@@ -61,11 +61,24 @@ code {
 
 .emailline-wrapper {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   border-top: .5px solid rgb(219, 219, 219);
   border-bottom: .5px solid rgb(219, 219, 219);
 }
 
 .pinch-font { padding-top: 3px; }
 
-.emailline-wrapper .subject { text-align: center; }
+.email-content { flex: 1; }
+
+.email-header {
+  display: flex;
+}
+
+.subject,
+.sender,
+.date { 
+  flex: 1;
+}
+
+.subject { text-align: center; }
+.date { text-align: right; }

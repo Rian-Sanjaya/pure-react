@@ -51,9 +51,9 @@ const EmailLine = () => (
     <div className=" wrapper emailline-wrapper">
         <input type="checkbox"/>
         <i className="fas fa-thumbtack pinch-font"/>
-        <div>
+        <div className="email-content">
             <div className="email-header">
-                <span>Sender</span><span className="subject">Subject</span><span className="date">Date</span>
+                <div className="sender">Sender</div><div className="subject">Subject</div><div className="date">Date</div>
             </div>
             <div>
                 Message

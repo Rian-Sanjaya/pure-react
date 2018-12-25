@@ -33,6 +33,10 @@
   border-bottom-color: #FFAA3F;
 }
 
+.app-nav-itemCount {
+  font-weight: bold;
+}
+
 .App-content {
   margin: 0 20px; 
 }

@@ -28,7 +28,7 @@ const Nav = ({ activeTab, items, onTabChange }) => {
                 </li>
             </ul>
             {totalItems && 
-            <div className="app-nav-itemCount">{totalItems} items (${totalCost.toFixed(2)})</div>
+            <div className="app-nav-itemCount"><i class="fas fa-shopping-cart"></i> {totalItems} items (${totalCost.toFixed(2)})</div>
             }
         </nav>
     );

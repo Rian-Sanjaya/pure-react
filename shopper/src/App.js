@@ -8,15 +8,29 @@ import CartPage from './CartPage';
 class App extends Component {
   state = {
     activeTab: 0,
-    cart: []
+    cart: [],
+    cartItems: []
   };
 
   handleAddToCart = (item) => {
     // ...this.state.cart is ES6 spread operator
     // cart: [1, 3, 1, ...]
-    this.setState({
-      cart: [...this.state.cart, item.id]
+
+    // this.setState({
+    //   cart: [...this.state.cart, item.id]
+    // });
+
+    this.setState( (prevState, props) => {
+      return {
+        cart: [...prevState.cart, item.id],
+      }
     });
+
+    // this.setState( (prevState, props) => {
+    //   return {
+    //     cartItems: this.countCartItems()
+    //   }
+    // });
   }
 
   handleRemoveFromCart = (item) => {
@@ -41,22 +55,7 @@ class App extends Component {
     });
   }
 
-  renderContent() {
-    switch (this.state.activeTab) {
-      default:
-      case 0: 
-        return (
-          <ItemPage 
-            items={items} 
-            onAddToCart={this.handleAddToCart}
-          />      
-        );
-
-      case 1: return this.renderCart();
-    }
-  }
-
-  renderCart() {
+  countCartItems = () => {
     // Array.prototype.reduce()
     // The first time it is called, since the “previous iteration” hasn’t happened yet, 
     // it needs an initial value which we supplied as the last argument (the empty object {}). 
@@ -91,6 +90,7 @@ class App extends Component {
       // }
 
     }, {});
+    // console.log(itemCounts);
 
     // create an array of items
     let cartItems = Object.keys(itemCounts).map( itemId => {
@@ -111,6 +111,27 @@ class App extends Component {
     // ]
 
     // console.log(cartItems);
+    return cartItems;
+  };
+
+  renderContent() {
+    switch (this.state.activeTab) {
+      default:
+      case 0: 
+        return (
+          <ItemPage 
+            items={items} 
+            onAddToCart={this.handleAddToCart}
+          />      
+        );
+
+      case 1: return this.renderCart();
+    }
+  }
+
+  renderCart() {
+    const cartItems = this.countCartItems();
+    
     return (
       <CartPage 
         items={cartItems} 
@@ -121,11 +142,12 @@ class App extends Component {
   }
 
   render() {
-    let {activeTab} = this.state;
+    let {activeTab, cart} = this.state;
+    const cartItems = this.countCartItems();
     // console.log(activeTab);
     return (
       <div className="App">
-        <Nav activeTab={activeTab} onTabChange={this.handleTabChange} />
+        <Nav activeTab={activeTab} items={cartItems} onTabChange={this.handleTabChange} />
         <main className="App-content">
           {/* <div>{this.state.cart.length} items</div> */}
           {this.renderContent()}

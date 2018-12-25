@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Nav = ({ activeTab, onTabChange }) => ( 
+const Nav = ({ activeTab, items, onTabChange }) => ( 
     <nav className="App-nav">
         <ul>
             <li className={`App-nav-item ${activeTab === 0 && 'selected'}`}>
@@ -16,7 +16,8 @@ const Nav = ({ activeTab, onTabChange }) => (
                 {/* <a onClick={() => onTabChange(1)}>Cart</a> */}
                 <NavLink index={1} onClick={onTabChange}>Cart</NavLink>
             </li>
-        </ul>            
+        </ul>
+        <div className="app-nav-itemsCount">{items.length} items</div>
     </nav>    
 );
 
